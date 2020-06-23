@@ -1,14 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Name from "./Name";
 import ColorPicker from "./ColorPicker";
 import randomColor from "randomcolor";
-import WindowSize from "./WindowSize";
+import WindowSize from "./useWindowSize";
+import Canvas from './Canvas';
+import RefreshButton from "./RefreshButton";
+import useWindowSize from "./useWindowSize";
 
 export default function Paint() {
   const [colors, setColors] = useState([]);
   const [activeColor, setActiveColor] = useState(null);
+  const [visible, setVisible] = useState(false);
+  let timeoutId = useRef();
+  const [windowWidth, windowHeight] = useWindowSize(() => {
+    setVisible(true)
+    clearTimeout(timeoutId.current)
+    timeoutId.current = setTimeout(() => setVisible(false), 500)
+  });
+  
 
-  const getColors = () => {
+
+  const getColors = useCallback(() => {
     const baseColor = randomColor().slice(1);
     fetch(`https://www.thecolorapi.com/scheme?hex=${baseColor}&mode=monochrome`)
       .then((res) => res.json())
@@ -16,22 +28,35 @@ export default function Paint() {
         setColors(res.colors.map((color) => color.hex.value));
         setActiveColor(res.colors[0].hex.value);
       });
-  };
+  }, [])
   useEffect(getColors, []);
 
+  const headerRef = useRef({ offsetHeight: 0 })
+
   return (
-    <header style={{ borderTop: `10px solid ${activeColor}` }}>
-      <div className="app">
-        <Name />
+    <div className='app'>
+      <header ref={headerRef} style={{ borderTop: `10px solid ${activeColor}` }}>
+        <div className="app">
+          <Name />
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <ColorPicker
+            colors={colors}
+            activeColor={activeColor}
+            setActiveColor={setActiveColor}
+          />
+          <RefreshButton cb={getColors}/>
+        </div>
+      </header>
+      {activeColor && (
+        <Canvas
+        color={activeColor}
+        height={window.innerHeight - headerRef.current.offsetHeight}
+          />
+      )}
+      <div className={`window-size ${visible ? '' : 'hidden'}`}>
+        {windowWidth} x {windowHeight}
       </div>
-      <div style={{ marginTop: 10 }}>
-        <ColorPicker
-          colors={colors}
-          activeColor={activeColor}
-          setActiveColor={setActiveColor}
-        />
-        <WindowSize />
-      </div>
-    </header>
+    </div>
   );
 }

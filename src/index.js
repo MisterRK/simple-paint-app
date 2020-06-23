@@ -9,7 +9,7 @@ import Paint from './components/Paint'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Paint />
+    < Paint />
   </React.StrictMode>,
   document.getElementById('root')
 );
