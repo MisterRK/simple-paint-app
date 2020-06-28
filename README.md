@@ -10,7 +10,7 @@ I have very little experience with React Hooks up to this point and saw this as 
 
 ## Installation
 
-Run npm install to load all dependencies then run npm start to load the development server. From there you can navigate the app. ( *** NOTE there is no backend at this time so reloading the page will destroy your precious creation..take a screen shot if you really love it )
+Run `npm install` to load all dependencies then run `npm start` to load the development server. From there you can navigate the app. ( *** NOTE there is no backend at this time so reloading the page will destroy your precious creation..take a screen shot if you really love it )
 
 ## Tech Used
 ### Built with;
