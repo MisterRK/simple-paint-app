@@ -13,10 +13,10 @@ I have very little experience with React Hooks up to this point and saw this as 
 Run npm install to load all dependencies then run npm start to load the development server. From there you can navigate the app. ( *** NOTE there is no backend at this time so reloading the page will destroy your precious creation..take a screen shot if you really love it )
 
 ## Tech Used
-# Built with;
+### Built with;
 ReactJS, React Hooks, CSS, Random Color Library
 
-# Credit to Scrimba and their awesome platform for making courses like this to teach new Developers things they don't know.
+##### Credit to Scrimba and their awesome platform for making courses like this to teach new Developers things they don't know.
 
 
 ## Available Scripts
