@@ -12,6 +12,10 @@ I have very little experience with React Hooks up to this point and saw this as 
 
 Run `npm install` to load all dependencies then run `npm start` to load the development server. From there you can navigate the app. ( *** NOTE there is no backend at this time so reloading the page will destroy your precious creation..take a screen shot if you really love it )
 
+## Quick Video Demo
+[Simple Paint Demo](https://youtu.be/Us_AEX8IWuA)
+
+
 ## Tech Used
 ### Built with;
 ReactJS, React Hooks, CSS, Random Color Library
